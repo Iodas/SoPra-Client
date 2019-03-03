@@ -83,7 +83,10 @@ class Login extends React.Component {
    * HTTP POST request is sent to the backend.
    * If the request is successful, a new user is returned to the front-end and its token is stored in the localStorage.
    */
-  login() {
+
+
+
+  login(){
     fetch(`${getDomain()}/users`, {
       method: "POST",
       headers: {
@@ -94,21 +97,27 @@ class Login extends React.Component {
         name: this.state.name
       })
     })
-      .then(response => response.json())
-      .then(returnedUser => {
-        const user = new User(returnedUser);
-        // store the token into the local storage
-        localStorage.setItem("token", user.token);
-        // user login successfully worked --> navigate to the route /game in the GameRouter
-        this.props.history.push(`/game`);
-      })
-      .catch(err => {
-        if (err.message.match(/Failed to fetch/)) {
-          alert("The server cannot be reached. Did you start it?");
-        } else {
-          alert(`Something went wrong during the login: ${err.message}`);
-        }
-      });
+        .then(response => response.json())
+        .then(returnedUser => {
+          const user = new User(returnedUser);
+          // store the token into the local storage
+          localStorage.setItem("token", user.token);
+          // user login successfully worked --> navigate to the route /game in the GameRouter
+
+          //comment this out when login works
+          this.props.history.push(`/game`);
+        })
+        .catch(err => {
+          if (err.message.match(/Failed to fetch/)) {
+            alert("The server cannot be reached. Did you start it?");
+          } else {
+            alert(`Something went wrong during the login: ${err.message}`);
+          }
+        });
+  }
+
+  gotoregister(){
+    this.props.history.push("/register");
   }
 
   /**
@@ -129,7 +138,9 @@ class Login extends React.Component {
    * You may call setState() immediately in componentDidMount().
    * It will trigger an extra rendering, but it will happen before the browser updates the screen.
    */
-  componentDidMount() {}
+  componentDidMount() {
+
+  }
 
   render() {
     return (
@@ -159,6 +170,15 @@ class Login extends React.Component {
                 }}
               >
                 Login
+              </Button>
+              <Button
+                  //disabled={!this.state.username || !this.state.name}
+                  width="50%"
+                  onClick={() => {
+                    this.gotoregister();
+                  }}
+              >
+                Register
               </Button>
             </ButtonContainer>
           </Form>
