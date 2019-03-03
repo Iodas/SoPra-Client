@@ -87,24 +87,12 @@ class Login extends React.Component {
 
 
   login(){
-    fetch(`${getDomain()}/users`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({
-        username: this.state.username,
-        name: this.state.name
-      })
-    })
+    fetch(`${getDomain()}/users`)
         .then(response => response.json())
         .then(returnedUser => {
+          //check if login data works
           const user = new User(returnedUser);
-          // store the token into the local storage
           localStorage.setItem("token", user.token);
-          // user login successfully worked --> navigate to the route /game in the GameRouter
-
-          //comment this out when login works
           this.props.history.push(`/game`);
         })
         .catch(err => {

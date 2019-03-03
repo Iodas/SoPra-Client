@@ -101,7 +101,7 @@ class Register extends React.Component {
             .then(returnedUser => {
                 const user = new User(returnedUser);
                 // store the token into the local storage
-                localStorage.setItem("token", user.token);
+                //localStorage.setItem("token", user.token);
                 // user login successfully worked --> navigate to the route /game in the GameRouter
 
                 //comment this out when login works
