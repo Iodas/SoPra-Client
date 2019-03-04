@@ -186,7 +186,7 @@ returnToLogin(){
                                 this.handleInputChange("username", e.target.value);
                             }}
                         />
-                        <Label>Name</Label>
+                        <Label>Password</Label>
                         <InputField
                             placeholder="Enter here.."
                             onChange={e => {

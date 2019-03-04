@@ -85,12 +85,36 @@ class Login extends React.Component {
    */
 
 
+  checkData(username, password){
+    fetch(`${getDomain()}/users`)
+        .then(response => response.json())
+        .then(userdata => {
+          var i = 0;
+          while (userdata.length > i){
+            if (userdata[i].username === username){
+              if (userdata[i].name === password){
+                this.login();
+              }
+              else{
+                alert("Wrong Password!");
+              }
+            }
+            i++;
+          }
+        })
+        .catch(err => {
+          if (err.message.match(/Failed to fetch/)) {
+            alert("The server cannot be reached. Did you start it?");
+          } else {
+            alert(`Something went wrong during the login: ${err.message}`);
+          }
+        });
+  }
 
   login(){
     fetch(`${getDomain()}/users`)
         .then(response => response.json())
         .then(returnedUser => {
-          //check if login data works
           const user = new User(returnedUser);
           localStorage.setItem("token", user.token);
           this.props.history.push(`/game`);
@@ -142,7 +166,7 @@ class Login extends React.Component {
                 this.handleInputChange("username", e.target.value);
               }}
             />
-            <Label>Name</Label>
+            <Label>Password</Label>
             <InputField
               placeholder="Enter here.."
               onChange={e => {
@@ -154,7 +178,7 @@ class Login extends React.Component {
                 disabled={!this.state.username || !this.state.name}
                 width="50%"
                 onClick={() => {
-                  this.login();
+                  this.checkData(this.state.username, this.state.name);
                 }}
               >
                 Login
