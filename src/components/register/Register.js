@@ -86,13 +86,18 @@ class Register extends React.Component {
 
 
     availableUsername(username){
-        fetch(`${getDomain()}/users`)
+        fetch(`${getDomain()}/users`, {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json"
+            }
+        })
             .then(response => response.json())
             .then(userdata => {
                 var i = 0;
                 var checker = true;
                 while (i < userdata.length){
-                    if (username == userdata[i].username){
+                    if (username === userdata[i].username){
                         alert("Username already taken!");
                         checker = false;
                         return false;

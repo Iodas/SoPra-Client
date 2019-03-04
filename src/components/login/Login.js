@@ -86,7 +86,12 @@ class Login extends React.Component {
 
 
   checkData(username, password){
-    fetch(`${getDomain()}/users`)
+    fetch(`${getDomain()}/users`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json"
+      }
+    })
         .then(response => response.json())
         .then(userdata => {
           var i = 0;
@@ -112,7 +117,12 @@ class Login extends React.Component {
   }
 
   login(){
-    fetch(`${getDomain()}/users`)
+    fetch(`${getDomain()}/users`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json"
+      }
+    })
         .then(response => response.json())
         .then(returnedUser => {
           const user = new User(returnedUser);
