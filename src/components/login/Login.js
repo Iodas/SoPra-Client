@@ -76,7 +76,8 @@ class Login extends React.Component {
     super();
     this.state = {
       name: null,
-      username: null
+      username: null,
+      password: null
     };
   }
   /**
@@ -99,7 +100,7 @@ class Login extends React.Component {
           while (userdata.length > i){
             if (userdata[i].username === username){
               existUser = true;
-              if (userdata[i].name === password){
+              if (userdata[i].password === password){
                 this.login();
               }
               else{
@@ -185,15 +186,15 @@ class Login extends React.Component {
             <InputField
               placeholder="Enter here.."
               onChange={e => {
-                this.handleInputChange("name", e.target.value);
+                this.handleInputChange("password", e.target.value);
               }}
             />
             <ButtonContainer>
               <Button
-                disabled={!this.state.username || !this.state.name}
+                disabled={!this.state.username || !this.state.password}
                 width="50%"
                 onClick={() => {
-                  this.checkData(this.state.username, this.state.name);
+                  this.checkData(this.state.username, this.state.password);
                 }}
               >
                 Login

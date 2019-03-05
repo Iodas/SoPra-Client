@@ -76,7 +76,8 @@ class Register extends React.Component {
         super();
         this.state = {
             name: null,
-            username: null
+            username: null,
+            password: null
         };
     }
     /**
@@ -130,7 +131,8 @@ class Register extends React.Component {
             },
             body: JSON.stringify({
                 username: this.state.username,
-                name: this.state.name
+                name: this.state.name,
+                password: this.state.password
             })
         })
             .then(response => response.json())
@@ -191,16 +193,23 @@ returnToLogin(){
                                 this.handleInputChange("username", e.target.value);
                             }}
                         />
-                        <Label>Password</Label>
+                        <Label>User</Label>
                         <InputField
                             placeholder="Enter here.."
                             onChange={e => {
                                 this.handleInputChange("name", e.target.value);
                             }}
                         />
+                        <Label>Password</Label>
+                        <InputField
+                            placeholder="Enter here.."
+                            onChange={e => {
+                                this.handleInputChange("password", e.target.value);
+                            }}
+                        />
                         <ButtonContainer>
                             <Button
-                                disabled={!this.state.username || !this.state.name}
+                                disabled={!this.state.username || !this.state.name || !this.state.password}
                                 width="50%"
                                 onClick={() => {
                                     this.availableUsername(this.state.username);
