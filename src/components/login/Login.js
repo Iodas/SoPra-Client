@@ -95,8 +95,10 @@ class Login extends React.Component {
         .then(response => response.json())
         .then(userdata => {
           var i = 0;
+          var existUser = false;
           while (userdata.length > i){
             if (userdata[i].username === username){
+              existUser = true;
               if (userdata[i].name === password){
                 this.login();
               }
@@ -105,6 +107,9 @@ class Login extends React.Component {
               }
             }
             i++;
+          }
+          if (existUser == false){
+            alert("This user doesn't exist!");
           }
         })
         .catch(err => {
