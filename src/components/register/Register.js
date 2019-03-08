@@ -85,7 +85,7 @@ class Register extends React.Component {
      * If the request is successful, a new user is returned to the front-end and its token is stored in the localStorage.
      */
 
-
+/*
     availableUsername(username){
         fetch(`${getDomain()}/users`, {
             method: "GET",
@@ -119,7 +119,7 @@ class Register extends React.Component {
             });
 
     }
-
+*/
 
 
 //register function is pretty much template from login with some added stuff
@@ -135,16 +135,17 @@ class Register extends React.Component {
                 password: this.state.password
             })
         })
-            .then(response => response.json())
+            .then(response => {
+                if (response.status === 201){
+                    this.probs.history.push('/login');
+                }
+                else if (response.status ===409){
+                    alert("Username already taken!");
+                }
+            })
             .then(returnedUser => {
                 const user = new User(returnedUser);
-                // store the token into the local storage
-                //localStorage.setItem("token", user.token);
-                // user login successfully worked --> navigate to the route /game in the GameRouter
-
-                //comment this out when login works
                 this.props.history.push(`/login`);
-
             })
             .catch(err => {
                 if (err.message.match(/Failed to fetch/)) {
@@ -212,7 +213,7 @@ returnToLogin(){
                                 disabled={!this.state.username || !this.state.name || !this.state.password}
                                 width="50%"
                                 onClick={() => {
-                                    this.availableUsername(this.state.username);
+                                    this.register();
                                 }}
                             >
                                 Create new User
