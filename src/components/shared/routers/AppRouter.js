@@ -5,6 +5,7 @@ import GameRouter from "./GameRouter";
 import { LoginGuard } from "../routeProtectors/LoginGuard";
 import Login from "../../login/Login";
 import Register from "../../register/Register";
+import Profile from "../../game/Profile";
 
 /**
  * Main router of your application.
@@ -41,6 +42,10 @@ class AppRouter extends React.Component {
               <Route
                   path="/register"
                   component={Register}
+              />
+              <Route
+                  path="/profile"
+                  component={Profile}
               />
             <Route path="/" exact render={() => <Redirect to={"/login"} />} />
           </div>

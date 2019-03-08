@@ -6,6 +6,7 @@ import Player from "../../views/Player";
 import { Spinner } from "../../views/design/Spinner";
 import { Button } from "../../views/design/Button";
 import { withRouter } from "react-router-dom";
+import User from "../shared/models/User";
 
 const Container = styled(BaseContainer)`
   color: white;
@@ -57,6 +58,13 @@ class Game extends React.Component {
         console.log(err);
         alert("Something went wrong fetching the users: " + err);
       });
+
+  }
+
+
+  goToProfile(user){
+    /*this.setState({user});
+    this.probs.history.push('/login'); */
   }
 
   render() {
@@ -71,7 +79,7 @@ class Game extends React.Component {
             <Users>
               {this.state.users.map(user => {
                 return (
-                  <PlayerContainer key={user.id}>
+                  <PlayerContainer key={user.id} onClick={() => {this.goToProfile(user);}}>
                     <Player user={user} />
                   </PlayerContainer>
                 );
