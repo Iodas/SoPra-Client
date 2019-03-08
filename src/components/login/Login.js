@@ -85,7 +85,7 @@ class Login extends React.Component {
    * If the request is successful, a new user is returned to the front-end and its token is stored in the localStorage.
    */
 
-
+/*
   checkData(username, password){
     fetch(`${getDomain()}/users`, {
       method: "GET",
@@ -120,20 +120,36 @@ class Login extends React.Component {
             alert(`Something went wrong during the login: ${err.message}`);
           }
         });
-  }
+  }*/
 
   login(){
-    fetch(`${getDomain()}/users`, {
-      method: "GET",
+    var switcher = false;
+    fetch(`${getDomain()}/users/logindata`, {
+      method: "POST",
       headers: {
         "Content-Type": "application/json"
-      }
+      },
+      body: JSON.stringify({
+        username: this.state.username,
+        password: this.state.password
+      })
     })
-        .then(response => response.json())
+        .then(response => {
+          if (response.status === 200){
+            switcher = true;
+          }
+          else if (response.status === 404){
+            switcher = false;
+            alert("invalid credentials!");
+          }
+        })
         .then(returnedUser => {
-          const user = new User(returnedUser);
-          localStorage.setItem("token", user.token);
-          this.props.history.push(`/game`);
+          if (switcher === true) {
+
+            const user = new User(returnedUser);
+            localStorage.setItem("token", user.token);
+            this.props.history.push(`/game`);
+          }
         })
         .catch(err => {
           if (err.message.match(/Failed to fetch/)) {
@@ -194,7 +210,7 @@ class Login extends React.Component {
                 disabled={!this.state.username || !this.state.password}
                 width="50%"
                 onClick={() => {
-                  this.checkData(this.state.username, this.state.password);
+                  this.login(this.state.username, this.state.password);
                 }}
               >
                 Login

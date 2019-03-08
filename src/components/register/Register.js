@@ -124,6 +124,7 @@ class Register extends React.Component {
 
 //register function is pretty much template from login with some added stuff
     register(){
+        var switcher = false;
         fetch(`${getDomain()}/users`, {
             method: "POST",
             headers: {
@@ -137,15 +138,17 @@ class Register extends React.Component {
         })
             .then(response => {
                 if (response.status === 201){
-                    this.probs.history.push('/login');
+                    switcher = true;
                 }
                 else if (response.status ===409){
                     alert("Username already taken!");
                 }
             })
             .then(returnedUser => {
-                const user = new User(returnedUser);
-                this.props.history.push(`/login`);
+                if (switcher === true) {
+                    const user = new User(returnedUser);
+                    this.props.history.push(`/login`);
+                }
             })
             .catch(err => {
                 if (err.message.match(/Failed to fetch/)) {
