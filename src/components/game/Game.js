@@ -37,6 +37,7 @@ class Game extends React.Component {
 
   logout() {
     localStorage.removeItem("token");
+    //this.state.status = "OFFLINE";
     this.props.history.push("/login");
   }
 

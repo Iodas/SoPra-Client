@@ -1,5 +1,3 @@
-import {Spinner} from "../../views/design/Spinner";
-import Player from "./Game";
 import {Button} from "../../views/design/Button";
 import {withRouter} from "react-router-dom";
 import * as React from "react";
@@ -55,6 +53,15 @@ class Profile extends React.Component {
                 <PlayerContainer>
                     <Users>
                         <Label>username: </Label>{this.props.user.username}
+                    </Users>
+                    <Users>
+                        <Label>status: </Label>{this.props.user.status}
+                    </Users>
+                    <Users>
+                        <Label>creation date: </Label>{this.props.user.date}
+                    </Users>
+                    <Users>
+                        <Label>birthday: </Label>{this.props.user.birthday}
                     </Users>
                 </PlayerContainer>
                 <ButtonContainer>
