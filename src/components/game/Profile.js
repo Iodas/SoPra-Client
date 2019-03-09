@@ -24,12 +24,23 @@ const PlayerContainer = styled.li`
   justify-content: center;
 `;
 
+const Label = styled.label`
+  color: white;
+  text-transform: capitalize;
+  padding: 10px;
+`;
+
+const ButtonContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+`;
 
 
 
 class Profile extends React.Component {
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.state = {
             users: null
         };
@@ -40,32 +51,24 @@ class Profile extends React.Component {
     render() {
         return (
             <Container>
-                <h2>Happy Coding! </h2>
-                <p>Get all users from secure end point:</p>
-                {!this.state.users ? (
-                    <Spinner />
-                ) : (
-                    <div>
-                        <Users>
-                            {this.state.users.map(user => {
-                                return (
-                                    <PlayerContainer key={user.id}>
-                                        <Player user={user} />
-                                    </PlayerContainer>
-                                );
-                            })}
-                        </Users>
-                        <Button
-                            width="100%"
-                            onClick={() => {
-                                this.logout();
-                            }}
-                        >
-                            Logout
-                        </Button>
-                    </div>
-                )}
+                <h2>Profile </h2>
+                <PlayerContainer>
+                    <Users>
+                        <Label>username: </Label>{this.props.user.username}
+                    </Users>
+                </PlayerContainer>
+                <ButtonContainer>
+                    <Button
+                        width="50%"
+                        onClick={() => {
+                            this.props.history.push('/game');
+                        }}
+                    >
+                        back
+                    </Button>
+                </ButtonContainer>
             </Container>
+
         );
     }
 }
