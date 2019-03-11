@@ -142,6 +142,7 @@ class Login extends React.Component {
             switcher = false;
             alert("invalid credentials!");
           }
+          return response.json();
         })
         .then(returnedUser => {
           if (switcher === true) {

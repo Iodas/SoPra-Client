@@ -105,7 +105,7 @@ class Edit extends React.Component {
         })
             .then(response => {
                 if (response.status === 204){
-                    this.props.history.push('/profile')
+                    this.props.history.push('/game')
                 }
                 else if (response.status === 401)  {
                     alert("oh no wrong token!" + myToken);
