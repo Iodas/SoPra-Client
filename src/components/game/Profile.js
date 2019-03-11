@@ -3,6 +3,7 @@ import {withRouter} from "react-router-dom";
 import * as React from "react";
 import styled from "styled-components";
 import {BaseContainer} from "../../helpers/layout";
+import Edit from "./Edit";
 
 
 const Container = styled(BaseContainer)`
@@ -35,18 +36,20 @@ const ButtonContainer = styled.div`
 `;
 
 
-
 class Profile extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            users: null
+            edit: false
         };
     }
 
 
 
     render() {
+        if (this.state.edit === true){
+            return <Edit user={this.props.user}/>
+        }
         return (
             <Container>
                 <h2>Profile </h2>
@@ -72,6 +75,14 @@ class Profile extends React.Component {
                         }}
                     >
                         back
+                    </Button>
+                    <Button
+                        width="50%"
+                        onClick={() => {
+                            this.setState({edit: true});
+                        }}
+                    >
+                        Edit Profile
                     </Button>
                 </ButtonContainer>
             </Container>
