@@ -108,7 +108,7 @@ class Edit extends React.Component {
                     this.props.history.push('/game')
                 }
                 else if (response.status === 401)  {
-                    alert("oh no wrong token!" + myToken);
+                    alert("You are not authorized to do that!");
                 }
             })
             .catch(err => {

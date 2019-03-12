@@ -36,9 +36,34 @@ class Game extends React.Component {
   }
 
   logout() {
-    localStorage.removeItem("token");
+    var myToken = localStorage.getItem("token");
+    var id = localStorage.getItem("id");
+    fetch(`${getDomain()}/users/` + id, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        token: myToken,
+        status: "OFFLINE"
+      })
+    })
+        .then(response => {
+          if (response.status === 204){
+            localStorage.removeItem("token");
+            this.props.history.push('/game')
+          }
+          else if (response.status === 401)  {
+            alert("You are not authorized to do that!");
+          }
+        })
+        .catch(err => {
+          console.log(err);
+          alert("Something went wrong: " + err);
+        });
+    /*localStorage.removeItem("token");
     //this.state.status = "OFFLINE";
-    this.props.history.push("/login");
+    this.props.history.push("/login");*/
   }
 
   componentDidMount() {
