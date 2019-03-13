@@ -5,6 +5,7 @@ import styled from "styled-components";
 import {BaseContainer} from "../../helpers/layout";
 import {getDomain} from "../../helpers/getDomain";
 import User from "../shared/models/User";
+import Profile from "./Game";
 
 
 const Container = styled(BaseContainer)`
