@@ -49,21 +49,14 @@ class Game extends React.Component {
       })
     })
         .then(response => {
-          if (response.status === 204){
-            localStorage.removeItem("token");
-            this.props.history.push('/game')
-          }
-          else if (response.status === 401)  {
-            alert("You are not authorized to do that!");
-          }
+          localStorage.removeItem("token");
+          this.props.history.push('/game')
+
         })
         .catch(err => {
           console.log(err);
           alert("Something went wrong: " + err);
         });
-    /*localStorage.removeItem("token");
-    //this.state.status = "OFFLINE";
-    this.props.history.push("/login");*/
   }
 
   componentDidMount() {
@@ -89,11 +82,6 @@ class Game extends React.Component {
 
   }
 
-
-  /*goToProfile(user){
-    this.setState({user});
-    this.probs.history.push('/login');
-  }*/
 
   render() {
     if(this.state.profile !== null){

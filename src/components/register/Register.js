@@ -85,42 +85,6 @@ class Register extends React.Component {
      * If the request is successful, a new user is returned to the front-end and its token is stored in the localStorage.
      */
 
-/*
-    availableUsername(username){
-        fetch(`${getDomain()}/users`, {
-            method: "GET",
-            headers: {
-                "Content-Type": "application/json"
-            }
-        })
-            .then(response => response.json())
-            .then(userdata => {
-                var i = 0;
-                var checker = true;
-                while (i < userdata.length){
-                    if (username === userdata[i].username){
-                        alert("Username already taken!");
-                        checker = false;
-                        return false;
-                    }
-                    i++;
-                }
-                if (checker){
-                    alert("You have been registered!")
-                    this.register();
-                }
-            })
-            .catch(err => {
-                if (err.message.match(/Failed to fetch/)) {
-                    alert("The server cannot be reached. Did you start it?");
-                } else {
-                    alert(`Something went wrong during the login: ${err.message}`);
-                }
-            });
-
-    }
-*/
-
 
 //register function is pretty much template from login with some added stuff
     register(){

@@ -85,42 +85,6 @@ class Login extends React.Component {
    * If the request is successful, a new user is returned to the front-end and its token is stored in the localStorage.
    */
 
-/*
-  checkData(username, password){
-    fetch(`${getDomain()}/users`, {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json"
-      }
-    })
-        .then(response => response.json())
-        .then(userdata => {
-          var i = 0;
-          var existUser = false;
-          while (userdata.length > i){
-            if (userdata[i].username === username){
-              existUser = true;
-              if (userdata[i].password === password){
-                this.login();
-              }
-              else{
-                alert("Wrong Password!");
-              }
-            }
-            i++;
-          }
-          if (existUser == false){
-            alert("This user doesn't exist!");
-          }
-        })
-        .catch(err => {
-          if (err.message.match(/Failed to fetch/)) {
-            alert("The server cannot be reached. Did you start it?");
-          } else {
-            alert(`Something went wrong during the login: ${err.message}`);
-          }
-        });
-  }*/
 
   login(){
     var switcher = false;
@@ -218,7 +182,6 @@ class Login extends React.Component {
                 Login
               </Button>
               <Button
-                  //disabled={!this.state.username || !this.state.name}
                   width="50%"
                   onClick={() => {
                     this.gotoregister();
